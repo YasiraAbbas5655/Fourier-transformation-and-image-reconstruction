@@ -1,0 +1,11 @@
+f=imread('cameraman.tif');
+figure;imshow(f);title('Origional Image');
+F=fftshift(fft2(f));
+freq_up=max(max(abs(F)));
+freq_low=-1*freq_up;
+phase=atan2(imag(F),real(F))*180/pi;
+phaseU=max(max(phase));
+phaseL=min(min(phase));
+y=linspace(freq_low,freq_up);
+x=linspace(phaseU, phaseL);
+imagesc(y,x,log(abs(F)));colormap(gray);title('Fourier Transformation');xlabel('Frequency');ylabel('Intensity');colorbar;
